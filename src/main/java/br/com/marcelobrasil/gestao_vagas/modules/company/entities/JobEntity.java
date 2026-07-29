@@ -1,5 +1,7 @@
 package br.com.marcelobrasil.gestao_vagas.modules.company.entities;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,10 +31,14 @@ public class JobEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @Schema(example = "Engenheiro de Software")
     private String description;
+
+    @Schema(example = "example = \"GYMPass, vale-refeição, vale-transporte")
     private String benefits;
 
     @NotBlank(message = "Esse campo é obrigatório")
+    @Schema(example = "Sênior")
     private String level;
 
     @Column(name = "company_id", nullable = false)
