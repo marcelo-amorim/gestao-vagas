@@ -37,14 +37,14 @@ public class AuthCandidateUseCase {
                         .orElseThrow(
                                 () -> {
                                     throw new UsernameNotFoundException(
-                                            "Username/password incorrect");
+                                            "Invalid username or password.");
                                 });
 
         var passwordMatches =
                 this.passwordEncoder.matches(authCandidateDTO.password(), candidate.getPassword());
 
         if (!passwordMatches) {
-            throw new AuthenticationException();
+            throw new AuthenticationException("Invalid username or password.");
         }
 
         Algorithm algorithm = Algorithm.HMAC256(secretKey);

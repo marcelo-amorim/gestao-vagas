@@ -7,7 +7,10 @@ import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -15,6 +18,9 @@ import java.util.UUID;
 
 @Entity(name = "company")
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class CompanyEntity {
 
     @Id
@@ -23,13 +29,13 @@ public class CompanyEntity {
 
     @Pattern(
             regexp = "^(?!\\s*$).+",
-            message = "O campo não deve ser vazio ou conter espaços em branco")
+            message = "This field must not be empty or contain only whitespace.")
     private String username;
 
-    @Email(message = "Campo de e-mail inválido")
+    @Email(message = "Invalid email address.")
     private String email;
 
-    @Length(min = 10, max = 100, message = "A senha deve ter entre 10 e 100 caracteres")
+    @Length(min = 10, max = 100, message = "Password must be between 10 and 100 characters.")
     private String password;
 
     private String website;

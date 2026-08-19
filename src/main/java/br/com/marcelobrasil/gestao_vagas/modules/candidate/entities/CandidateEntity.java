@@ -43,14 +43,14 @@ public class CandidateEntity {
             description = "Usuário de acesso do candidato")
     @Pattern(
             regexp = "^(?!\\s*$).+",
-            message = "O campo não deve ser vazio ou conter espaços em branco")
+            message = "This field must not be empty or contain only whitespace.")
     private String username;
 
     @Schema(
             example = "joao.silva@email.com",
             requiredMode = RequiredMode.REQUIRED,
             description = "E-mail do candidato")
-    @Email(message = "Campo de e-mail inválido")
+    @Email(message = "Invalid email address.")
     private String email;
 
     @Schema(
@@ -59,7 +59,7 @@ public class CandidateEntity {
             maxLength = 100,
             requiredMode = RequiredMode.REQUIRED,
             description = "Senha de acesso do candidato")
-    @Length(min = 10, max = 100, message = "A senha deve ter entre 10 e 100 caracteres")
+    @Length(min = 10, max = 100, message = "Password must be between 10 and 100 characters.")
     private String password;
 
     @Schema(example = "Engenheiro de Software", description = "Breve descrição do candidato")

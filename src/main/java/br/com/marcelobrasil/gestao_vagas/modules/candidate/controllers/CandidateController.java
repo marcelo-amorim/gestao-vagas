@@ -52,7 +52,7 @@ public class CandidateController {
         @ApiResponse(
                 responseCode = "200",
                 content = {@Content(schema = @Schema(implementation = CandidateEntity.class))}),
-        @ApiResponse(responseCode = "400", description = "Usuário já existe")
+        @ApiResponse(responseCode = "400", description = "User already exists.")
     })
     public ResponseEntity<Object> create(@Valid @RequestBody CandidateEntity candidateEntity) {
         try {
@@ -74,7 +74,7 @@ public class CandidateController {
                 content = {
                     @Content(schema = @Schema(implementation = ProfileCandidateResponseDTO.class))
                 }),
-        @ApiResponse(responseCode = "400", description = "User not found")
+        @ApiResponse(responseCode = "400", description = "User not found.")
     })
     public ResponseEntity<Object> get(HttpServletRequest request) {
         var candidateId = request.getAttribute("candidate_id");

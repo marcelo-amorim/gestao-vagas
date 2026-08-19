@@ -19,7 +19,7 @@ public class ProfileCandidateUseCase {
                         .findById(candidateId)
                         .orElseThrow(
                                 () -> {
-                                    throw new UsernameNotFoundException("User not found");
+                                    throw new UsernameNotFoundException("User not found.");
                                 });
 
         var candidateDTO =

@@ -2,6 +2,6 @@ package br.com.marcelobrasil.gestao_vagas.exceptions;
 
 public class UserNotFoundException extends RuntimeException {
     public UserNotFoundException() {
-        super("Usuário não encontrado.");
+        super("User not found.");
     }
 }

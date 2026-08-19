@@ -37,7 +37,7 @@ public class JobEntity {
     @Schema(example = "example = \"GYMPass, vale-refeição, vale-transporte")
     private String benefits;
 
-    @NotBlank(message = "Esse campo é obrigatório")
+    @NotBlank(message = "This field is required.")
     @Schema(example = "Sênior")
     private String level;
 
