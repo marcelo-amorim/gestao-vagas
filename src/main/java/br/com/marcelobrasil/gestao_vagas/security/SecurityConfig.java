@@ -14,12 +14,12 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 @EnableMethodSecurity
 public class SecurityConfig {
 
-    @Autowired SecurityFilter securityFilter;
+    @Autowired SecurityCompanyFilter securityCompanyFilter;
 
     @Autowired SecurityCandidateFilter securityCandidateFilter;
 
-    private static final String[] SWAGGER_LIST = {
-        "/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**"
+    private static final String[] PERMITTED_URLS = {
+        "/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**", "/actuator/**"
     };
 
     @Bean
@@ -27,7 +27,7 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(
                         auth -> {
-                            auth.requestMatchers(SWAGGER_LIST)
+                            auth.requestMatchers(PERMITTED_URLS)
                                     .permitAll()
                                     .requestMatchers("/candidate")
                                     .permitAll()
@@ -41,7 +41,7 @@ public class SecurityConfig {
                             auth.anyRequest().authenticated();
                         })
                 .addFilterBefore(securityCandidateFilter, BasicAuthenticationFilter.class)
-                .addFilterBefore(securityFilter, BasicAuthenticationFilter.class);
+                .addFilterBefore(securityCompanyFilter, BasicAuthenticationFilter.class);
         return http.build();
     }
 

@@ -1,5 +1,6 @@
 package br.com.marcelobrasil.gestao_vagas.modules.candidate.useCases;
 
+import br.com.marcelobrasil.gestao_vagas.exceptions.UserNotFoundException;
 import br.com.marcelobrasil.gestao_vagas.modules.candidate.dto.ProfileCandidateResponseDTO;
 import br.com.marcelobrasil.gestao_vagas.modules.candidate.repositories.CandidateRepository;
 
@@ -19,7 +20,7 @@ public class ProfileCandidateUseCase {
                         .findById(candidateId)
                         .orElseThrow(
                                 () -> {
-                                    throw new UsernameNotFoundException("User not found.");
+                                    throw new UserNotFoundException();
                                 });
 
         var candidateDTO =
