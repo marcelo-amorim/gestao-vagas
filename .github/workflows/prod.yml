@@ -28,3 +28,13 @@ jobs:
               run: docker build -t marcelittle/gestao_vagas .
             - name: Publish image
               run: docker push marcelittle/gestao_vagas
+    deploy:
+        needs: build
+        runs-on: self-hosted
+        steps:
+            - name: Pull image docker hub
+              run: docker pull marcelittle/gestao_vagas:latest
+            - name: Remove existing container
+              run: docker rm -f gestao-vagas
+            - name: Run docker container
+              run: docker run -d -p 8080:8080 -e DATABASE_URL=${{secrets.DATABASE_URL}} -e DATABASE_PASSWORD=${{secrets.DATABASE_PASSWORD}} -e DATABASE_USERNAME=${{secrets.DATABASE_USERNAME}} --name gestao-vagas marcelittle/gestao_vagas
