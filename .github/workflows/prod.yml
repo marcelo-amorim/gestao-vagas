@@ -37,4 +37,4 @@ jobs:
             - name: Remove existing container
               run: docker rm -f gestao-vagas
             - name: Run docker container
-              run: docker run -d -p 8080:8080 -e DATABASE_URL=${{secrets.DATABASE_URL}} -e DATABASE_PASSWORD='${{secrets.DATABASE_PASSWORD}}' -e DATABASE_USERNAME=${{secrets.DATABASE_USERNAME}} --name gestao-vagas marcelittle/gestao_vagas
+              run: docker run -d -p 8080:8080 -e DATABASE_URL=${{secrets.DATABASE_URL}} -e DATABASE_PASSWORD='${{secrets.DATABASE_PASSWORD}}' -e DATABASE_USERNAME=${{secrets.DATABASE_USERNAME}} -e SECURITY_TOKEN_SECRET_COMPANY=${{secrets.SECURITY_TOKEN_SECRET_COMPANY}} -e SECURITY_TOKEN_SECRET_CANDIDATE=${{secrets.SECURITY_TOKEN_SECRET_CANDIDATE}} --name gestao-vagas marcelittle/gestao_vagas
