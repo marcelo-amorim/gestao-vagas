@@ -35,24 +35,27 @@ public class AuthCompanyUseCase {
                         .findByUsername(authCompanyDTO.getUsername())
                         .orElseThrow(
                                 () -> {
-                                    throw new UsernameNotFoundException("Company not found.");
+                                    throw new UsernameNotFoundException(
+                                            "Invalid username or password.");
                                 });
 
         var passwordMatches =
                 this.passwordEncoder.matches(authCompanyDTO.getPassword(), company.getPassword());
 
         if (!passwordMatches) {
-            throw new AuthenticationException("Invalid password.");
+            throw new AuthenticationException("Invalid username or password.");
         }
 
         Algorithm algorithm = Algorithm.HMAC256(SECRET_KEY);
         var expiresIn = Instant.now().plus(Duration.ofHours(2));
 
+        var roles = Arrays.asList("COMPANY");
+
         var token =
                 JWT.create()
                         .withIssuer("gestao-vagas")
                         .withSubject(company.getId().toString())
-                        .withClaim("roles", Arrays.asList("COMPANY"))
+                        .withClaim("roles", roles)
                         .withExpiresAt(expiresIn)
                         .sign(algorithm);
 
@@ -60,6 +63,7 @@ public class AuthCompanyUseCase {
                 AuthCompanyResponseDTO.builder()
                         .access_token(token)
                         .expires_in(expiresIn.toEpochMilli())
+                        .roles(roles)
                         .build();
 
         return authCompanyResponseDTO;
